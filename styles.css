@@ -969,13 +969,29 @@ section {
 }
 
 /* === Projects Section === */
+.projects-slider-wrapper {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.projects-slider-container {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+
 .projects-grid {
     display: flex;
-    flex-direction: column;
-    gap: 40px;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    gap: 0;
 }
 
 .project-card {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
@@ -984,20 +1000,116 @@ section {
     border-radius: var(--radius-lg);
     overflow: hidden;
     transition: var(--transition-base);
+    transform-style: preserve-3d;
+    /* Key for tilt effect */
 }
 
-.project-card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-}
-
+/* Remove direction rtl for even children since we are in a slider now */
 .project-card:nth-child(even) {
-    direction: rtl;
+    direction: ltr;
 }
 
 .project-card:nth-child(even)>* {
     direction: ltr;
+}
+
+/* Slider Controls */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.slider-btn:hover {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+.slider-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.slider-btn.prev {
+    left: 0;
+}
+
+.slider-btn.next {
+    right: 0;
+}
+
+/* Slider Dots */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.dot.active,
+.dot:hover {
+    background: var(--accent-primary);
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .projects-slider-wrapper {
+        padding: 0;
+    }
+
+    .slider-btn {
+        width: 36px;
+        height: 36px;
+        background: rgba(10, 10, 15, 0.8);
+        backdrop-filter: blur(4px);
+    }
+
+    .slider-btn.prev {
+        left: 10px;
+    }
+
+    .slider-btn.next {
+        right: 10px;
+    }
+
+    .project-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .project-content {
+        padding: 24px;
+    }
+
+    .project-preview {
+        min-height: 250px;
+    }
 }
 
 .project-image {

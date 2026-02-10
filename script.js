@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initFormHandling();
     initParallaxEffects();
+    initProjectSlider();
 });
 
 // ============================================
