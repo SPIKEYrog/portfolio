@@ -745,52 +745,71 @@ section {
 }
 
 /* === About Section === */
+.about {
+    padding: 100px 0;
+    position: relative;
+}
+
 .about-content {
     display: grid;
-    grid-template-columns: 400px 1fr;
-    gap: 60px;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
     align-items: center;
 }
 
 .about-image {
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .image-frame {
     position: relative;
+    width: 320px;
+    height: 320px;
+    border-radius: 24px;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 30px;
+    padding: 16px;
+    transform: rotate(-3deg);
+    transition: var(--transition-base);
     box-shadow: var(--shadow-lg);
 }
 
-.image-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    height: 80%;
-    background: var(--gradient-glow);
-    border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.5;
+.image-frame:hover {
+    transform: rotate(0);
 }
 
 .about-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
     position: relative;
-    z-index: 1;
-    background: var(--gradient-1);
-    border-radius: var(--radius-md);
-    aspect-ratio: 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--bg-primary);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    /* Ensures hair/top of head is visible */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.about-avatar:hover .profile-img {
+    transform: scale(1.05);
 }
 
 .avatar-placeholder {
-    font-size: 120px;
+    font-size: 80px;
+    display: none;
+    /* Hide placeholder since we have an image */
 }
 
 .experience-badge {
@@ -968,7 +987,7 @@ section {
     transition: width 1s ease-out;
 }
 
-/* === Projects Section === */
+/* === Projects Section (Slider) === */
 .projects-slider-wrapper {
     position: relative;
     max-width: 1000px;
@@ -1001,12 +1020,6 @@ section {
     overflow: hidden;
     transition: var(--transition-base);
     transform-style: preserve-3d;
-    /* Key for tilt effect */
-}
-
-/* Remove direction rtl for even children since we are in a slider now */
-.project-card:nth-child(even) {
-    direction: ltr;
 }
 
 .project-card:nth-child(even)>* {
@@ -1090,15 +1103,9 @@ section {
         backdrop-filter: blur(4px);
     }
 
-    .slider-btn.prev {
-        left: 10px;
-    }
-
-    .slider-btn.next {
-        right: 10px;
-    }
-
     .project-card {
+        width: 85vw;
+        /* Adjust width for mobile */
         grid-template-columns: 1fr;
         gap: 20px;
     }
